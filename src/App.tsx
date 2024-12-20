@@ -27,10 +27,6 @@ export const App: React.FC = () => {
       });
   }, []);
 
-  if (!todoService.USER_ID) {
-    return <UserWarning />;
-  }
-
   const filteredTodos = todos.filter(todo => {
     switch (status) {
       case Status.Completed:
@@ -50,6 +46,10 @@ export const App: React.FC = () => {
     () => todos.filter(todo => todo.completed).length,
     [todos],
   );
+
+  if (!todoService.USER_ID) {
+    return <UserWarning />;
+  }
 
   function onCreateTodo({ userId, title, completed }: Todo) {
     setErrorMessage(Errors.Empty);
